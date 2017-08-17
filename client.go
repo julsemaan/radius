@@ -92,9 +92,17 @@ func (c *Client) Exchange(packet *Packet, addr string) (*Packet, error) {
 			return nil, err
 		}
 		received, err := Parse(incoming[:n], packet.Secret, packet.Dictionary)
-		if err == nil && received.IsAuthentic(packet) {
+		if err != nil {
 			conn.Close()
-			return received, nil
+			return nil, err
+		} else {
+			conn.Close()
+			return received, err
 		}
+		// This is the original code that was there prior to the ugly fix @julsemaan is currently writting :)
+		//if err == nil && received.IsAuthentic(packet) {
+		//	conn.Close()
+		//	return received, nil
+		//}
 	}
 }
