@@ -1,4 +1,4 @@
-package radius // import "layeh.com/radius"
+package radius // import "github.com/julsemaan/radius"
 
 func init() {
 	Builtin = &Dictionary{}
